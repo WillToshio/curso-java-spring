@@ -20,7 +20,7 @@ public class CategoriaService {
 			
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + 
-				"\nTipo: " + Categoria.class.getName()
+				"Tipo: " + Categoria.class.getName()
 				));
 	}
 	

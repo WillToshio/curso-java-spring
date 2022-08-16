@@ -10,8 +10,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.willcorrea.cursomc.domain.Categoria;
+import com.willcorrea.cursomc.domain.Cidade;
+import com.willcorrea.cursomc.domain.Estado;
 import com.willcorrea.cursomc.domain.Produto;
 import com.willcorrea.cursomc.repositories.CategoriaRepository;
+import com.willcorrea.cursomc.repositories.CidadeRepository;
+import com.willcorrea.cursomc.repositories.EstadoRepository;
 import com.willcorrea.cursomc.repositories.ProdutoRepository;
 
 import java.util.Arrays;
@@ -23,6 +27,10 @@ public class CursomcApplication implements CommandLineRunner {
 	private CategoriaRepository catRepository;
 	@Autowired
 	private ProdutoRepository prodRepository;
+	@Autowired
+	private CidadeRepository cityRepository;
+	@Autowired
+	private EstadoRepository estRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -32,23 +40,40 @@ public class CursomcApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 	
+		// Adding categories on db
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
-		
-		
+
+		// Adding products on db
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
+
+		// Adding States on db
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+
+		// Adding cities on db
+		Cidade c1 = new Cidade(null, "Uberlândia", est1);
+		Cidade c2 = new Cidade(null, "São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Campinas", est2);
+		
+		
 		
 		cat1.getProdutos().addAll(Arrays.asList( p1, p2, p3 ));
 		cat2.getProdutos().addAll(Arrays.asList( p2 ));
 		
-		p1.getCategorias().addAll(Arrays.asList(cat1));
-		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		p3.getCategorias().addAll(Arrays.asList(cat1));
+		p1.getCategorias().addAll(Arrays.asList( cat1 ));
+		p2.getCategorias().addAll(Arrays.asList( cat1, cat2 ));
+		p3.getCategorias().addAll(Arrays.asList( cat1 ));
 		
-		catRepository.saveAll(Arrays.asList(cat1, cat2));
-		prodRepository.saveAll(Arrays.asList(p1, p2, p3));
+		est1.getCidades().addAll(Arrays.asList( c1 ));
+		est2.getCidades().addAll(Arrays.asList( c2, c3 ));
+		
+		catRepository.saveAll(Arrays.asList( cat1, cat2 ));
+		prodRepository.saveAll(Arrays.asList( p1, p2, p3 ));
+		estRepository.saveAll(Arrays.asList( est1, est2 ));
+		cityRepository.saveAll(Arrays.asList( c1, c2, c3 ));
 	}
 
 }
