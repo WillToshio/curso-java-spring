@@ -83,14 +83,16 @@ public class CursomcApplication implements CommandLineRunner {
 		est2.getCidades().addAll(Arrays.asList( c2, c3 ));
 		
 		cli1.getTelefones().addAll(Arrays.asList("27363323","93838393"));
-		cli1.getEndereco().addAll(Arrays.asList(e1,e2));
+		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		
 		catRepository.saveAll(Arrays.asList( cat1, cat2 ));
 		prodRepository.saveAll(Arrays.asList( p1, p2, p3 ));
-		estRepository.saveAll(Arrays.asList( est1, est2 ));
-		cityRepository.saveAll(Arrays.asList( c1, c2, c3 ));
-		cliRepository.saveAll(Arrays.asList(cli1));
-		endRepository.saveAll(Arrays.asList(e1,e2));
+	    estRepository.saveAll(Arrays.asList( est1, est2 ));
+	    cityRepository.saveAll(Arrays.asList( c1, c2, c3 ));
+	    
+	    cliRepository.saveAll(Arrays.asList(cli1));
+	    endRepository.saveAll(Arrays.asList(e1,e2));
+		 
 	}
 
 }

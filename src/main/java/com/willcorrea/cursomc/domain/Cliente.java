@@ -15,15 +15,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.willcorrea.cursomc.domain.enums.TipoCliente;
+
 @Entity
-public class Cliente implements Serializable{
-	
-	
-	/**
-	 * 
-	 */
+public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Integer id;
@@ -32,8 +30,9 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@JsonManagedReference
 	@OneToMany( mappedBy = "cliente" )
-	private List<Endereco> endereco = new ArrayList<>();
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable( name = "Telefone")
@@ -52,7 +51,7 @@ public class Cliente implements Serializable{
 		this.tipo = tipo.getCod();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -92,12 +91,12 @@ public class Cliente implements Serializable{
 		this.tipo = tipo.getCod();
 	}
 
-	public List<Endereco> getEndereco() {
-		return endereco;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(List<Endereco> endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(List<Endereco> endereco) {
+		this.enderecos = endereco;
 	}
 
 	public Set<String> getTelefones() {
